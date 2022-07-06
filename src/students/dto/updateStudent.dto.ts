@@ -1,7 +1,22 @@
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+
 export class UpdateStudentDto {
-    firstName: string;
-    lastName:string;
-    age: number;
-    classroom: string;
-    avatar: string;
+  @IsNotEmpty()
+  @IsString()
+  firstName: string;
+
+  @IsNotEmpty()
+  @IsString()
+  lastName: string;
+
+  @IsNotEmpty()
+  @IsNumber()
+  age: number;
+
+  @IsNotEmpty()
+  @IsString()
+  classroom: string;
+
+  @IsNotEmpty()
+  avatar: string;
 }
