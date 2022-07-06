@@ -24,8 +24,8 @@ export class StudentController {
   }
 
   @Get(':studentId')
-  async getOneStudents(@Param('studentId') studentId: string) {
-    return this.studentsServices.getOneStudents(studentId);
+  async getOneStudents(@Param('studentId') studentId: string, @Res() response) {
+    return this.studentsServices.getOneStudents(studentId, response);
   }
 
   @Post()

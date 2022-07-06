@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  HttpStatus,
   Injectable,
   NotFoundException,
   Res,
@@ -21,12 +22,12 @@ export class StudentsService {
     return data;
   }
 
-  async getOneStudents(studentId: string) {
+  async getOneStudents(studentId: string, @Res() response) {
     const findStudent = await this.studentModel.findById(studentId);
     if (!findStudent) {
       throw new NotFoundException(`Student #${studentId} not found`);
     }
-    return findStudent;
+    return response.status(HttpStatus.OK).send(findStudent);
   }
 
   async createStudent(
@@ -37,7 +38,7 @@ export class StudentsService {
     if (!newStudent) {
       throw new BadRequestException(`Request Failed`);
     }
-    return response.json({
+    return response.status(HttpStatus.OK).json({
       message: 'Student has been successfully created',
     });
   }
@@ -47,7 +48,7 @@ export class StudentsService {
     if (!deletedStudent) {
       throw new NotFoundException(`Student #${studentId} not found`);
     }
-    return response.json({
+    return response.status(HttpStatus.OK).json({
       message: 'Student has been successfully deleted',
     });
   }
@@ -65,7 +66,7 @@ export class StudentsService {
     if (!updateStudent) {
       throw new NotFoundException(`Student #${studentId} not found`);
     }
-    return response.json({
+    return response.status(HttpStatus.OK).json({
       message: 'Student has been successfully updated',
     });
   }
